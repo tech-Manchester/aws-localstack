@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  localstack:
+    image: localstack/localstack
+    container_name: localstack_main
+    ports:
+      - "4566:4566" # Main Localstack gateway
+      - "4572:4572" # S3 service
+    environment:
+      - SERVICES=s3,lambda,dynamodb,rds
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "./localstack-data:/tmp/localstack/data"
